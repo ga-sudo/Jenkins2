@@ -1,5 +1,5 @@
 #!groovy
-library identifier : 'Jenkins@master', retriever: modernSCM(
+library identifier : 'Jenkins2@master', retriever: modernSCM(
 [ $class :  'GitSCMSource' ,
 remote:
 'https://github.com/ga-sudo/Jenkins2'​ ])
