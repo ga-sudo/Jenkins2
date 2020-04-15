@@ -1,7 +1,7 @@
-library(‘my-shared-library’)
-node(‘jenkins’) {
+library('my-shared-library')
+node('jenkins') {
  timestamps {
-    ansiColor(‘xterm’){
+    ansiColor('xterm'){
       log.info “SUCCESS.”
       log.warn “WARNING.”
   }
