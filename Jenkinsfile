@@ -1,4 +1,4 @@
-library(‘common’)
+library(‘my-shared-library’)
 node(‘jenkins’) {
  timestamps {
     ansiColor(‘xterm’){
