@@ -1,8 +1,8 @@
 #!groovy
 library identifier : 'Jenkins2@master', retriever: modernSCM(
-[ $class :  'GitSCMSource' ,
+[$class :  'GitSCMSource' ,
 remote:
-'https://github.com/ga-sudo/Jenkins2'​ ])
+'https://github.com/ga-sudo/Jenkins2'])
 pipeline {
 agent any
 options{
