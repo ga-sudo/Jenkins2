@@ -9,11 +9,11 @@ pipeline {
        ansiColor( 'xterm' )
    }
    stages {
-      stage( 'List All Images' ) {
+      stage( 'Coloured Outputs' ) {
          steps {
              script{
-                 logs.info “SUCCESS”
-                 logs.warn “WARNING”
+                 logs.info "SUCCESS"
+                 logs.warn "WARNING"
              }
          }
       }
