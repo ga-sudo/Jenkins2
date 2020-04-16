@@ -11,8 +11,10 @@ pipeline {
    stages {
       stage( 'List All Images' ) {
          steps {
-             log.info “SUCCESS”
-             log.warn “WARNING.”
+             script{
+                 log.info “SUCCESS”
+                 log.warn “WARNING”
+             }
          }
       }
    stage( 'Git Commit Id' ) {
