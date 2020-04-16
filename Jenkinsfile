@@ -14,6 +14,8 @@ pipeline {
              script{
                  logs.info "SUCCESS"
                  logs.warn "WARNING"
+                 def gitId=sh(script: 'git rev-parse HEAD' , returnStdout: true)
+                 logs.gitCommitId(gitId)
              }
          }
       }
