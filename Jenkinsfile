@@ -12,8 +12,8 @@ pipeline {
       stage( 'List All Images' ) {
          steps {
              script{
-                 log.info “SUCCESS”
-                 log.warn “WARNING”
+                 logs.info “SUCCESS”
+                 logs.warn “WARNING”
              }
          }
       }
