@@ -16,7 +16,7 @@ pipeline {
                     '''
                     logs.info( "Successfully Executed" )
                     def ret = sh(script:  'D' , returnStatus: true)
-                    logs.warning(ret)
+                    logs.warn(ret)
              }
        }
    }
