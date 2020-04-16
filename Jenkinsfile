@@ -1,23 +1,33 @@
-#!groovy
-library identifier: 'Jenkins2@master', retriever: modernSCM(
-        [$class: 'GitSCMSource' ,
-         remote: 'https://github.com/ga-sudo/Jenkins2'])
 pipeline {
-   agent any
-    options{
-       timestamps()
-       ansiColor( 'xterm' )
-   }
-   stages {
-      stage( 'Coloured Outputs with git commit id' ) {
-         steps {
-             script{
-                 logs.info "SUCCESS"
-                 logs.warn "WARNING"
-                 def gitId=sh(script: 'git rev-parse HEAD' , returnStdout: true)
-                 logs.gitCommitId(gitId)
-             }
-         }
-      }
-  }
+    agent any 
+    stages {
+        stage('Docker Build') {
+            steps {
+               sh 'docker build -t 044650439222.dkr.ecr.us-east-1.amazonaws.com/garima:$(git rev-parse HEAD) .'
+            }
+        }
+        stage('pushing image to ECR') {
+            steps {
+                sh 'docker push 044650439222.dkr.ecr.us-east-1.amazonaws.com/garima:$(git rev-parse HEAD)'
+            }
+        }
+        stage('Deploying on eks') {
+            steps {
+                	sh 'kubectl apply -f deployment.yml'
+			sh 'sleep 10'
+			sh 'kubectl get pods'
+			sh 'kubectl get svc'
+			sh 'kubectl describe pods'
+            }
+        }
+    }
+	post {
+        success {
+            emailext body: 'Success', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'success build'
+        }
+        failure {
+            emailext body: 'ailed', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'failed build'
+        }
+    }
+    
 }
