@@ -11,15 +11,10 @@ pipeline {
    stages {
       stage( 'List All Images' ) {
          steps {
-             script{
-                    sh  ''' docker image ls
-                    '''
-                    logs.info( "Successfully Executed" )
-                    def ret = sh(script:  'D' , returnStatus: true)
-                    logs.warn(ret)
-             }
-       }
-   }
+             log.info “SUCCESS”
+             log.warn “WARNING.”
+         }
+      }
    stage( 'Git Commit Id' ) {
       steps {
            script{
